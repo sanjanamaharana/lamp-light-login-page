@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .whole {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(16, 5, 142);
+        }
+
+        /* Container holding trapezium and form */
+        .shape-container {
+            position: relative;
+        }
+
+        /* Streetlight glow */
+        .trapezium::before {
+            content: "";
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 500px;
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        /* Trapezium shape behind form */
+        .trapezium {
+            border-top: 4px solid rgb(0, 85, 255);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 550px;
+            height: 520px;
+            background: linear-gradient(to bottom, rgba(255, 255, 100, 0.8), rgba(255, 255, 100, 0) 80%);
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+            z-index: 0;
+        }
+
+        .heading {
+            width: 90px;
+            left: 89px;
+            position: relative;
+            text-align: center;
+            margin-top: -25px;
+            margin-bottom: 16px;
+            z-index: 1;
+            font-size: larger;
+            border-bottom: 1.2px solid rgb(255, 255, 255);
+            display: block;
+
+        }
+
+        /* Form on top of trapezium */
+        .form-over-shape {
+            position: relative;
+            z-index: 1;
+            width: 300px;
+            padding: 10px;
+        }
+
+        /* Inputs fill width */
+        .form-over-shape input[type="text"],
+        .form-over-shape input[type="password"] {
+            box-sizing: border-box;
+            margin-top: 5px;
+            white-space: nowrap;
+            /* don't wrap text */
+            overflow: hidden;
+            border: none;
+            border-bottom: 2px solid rgb(255, 255, 255);
+            display: flex;
+            background-color: transparent;
+        }
+
+        /* Wrap password input and icon */
+        .password-wrapper {
+            position: relative;
+        }
+
+        /* Position the eye icon inside input */
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        /* Adjust input padding so text doesn't overlap icon */
+        .password-wrapper input {
+            padding-right: 30px;
+        }
+
+        input::placeholder {
+            color: #fff;
+            font-style: italic;
+        }
+
+        label,
+        input {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            flex: 0 0 80px;
+        }
+
+        .form-group input {
+            flex: 1;
+        }
+
+        .form-over-shape input[type="submit"] {
+            width: 100%;
+            display: block;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-top: 21px;
+            border: 2px solid rgb(0, 0, 0, 0.1);
+            border-radius: 23px;
+            background-color: rgb(16, 5, 142, 0.1);
+            color: #fff;
+            box-shadow: #fff;
+        }
+
+        .two {
+            display: inline;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .regis {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="whole">
+
+        <div class="shape-container">
+            <!-- Trapezium -->
+            <div class="trapezium"></div>
+            <div class="heading">
+                <h3> Log In</h3>
+            </div>
+            <!-- Form -->
+            <form action="#" class="form-over-shape">
+                <div class="form-group">
+                    <!-- <label for="fname">User name:</label> -->
+                    <input id="fname" type="text" placeholder="User Name" maxlength="20" />
+                </div>
+                <div class="form-group password-wrapper">
+                    <!-- <label for="lname">password:</label> -->
+                    <input id="lname" type="password" placeholder="password" maxlength="20" />
+                    <span class="toggle-password">👁</span>
+                </div>
+                <div class="two">
+                    <span><input type="checkbox">Remember me</span>
+                    <p>Forgot password?</p>
+                </div>
+                <input type="submit" class="submit" value="Login" />
+                <div class="regis">Don't have an account? <b>Register</b></div>
+            </form>
+
+        </div>
+
+    </div>
+    <script>
+        
+            const togglePassword = document.querySelector(".toggle-password");
+            const passwordInput = document.querySelector("#lname");
+
+  togglePassword.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            togglePassword.textContent = "🙈"; // change icon when showing
+    } else {
+                passwordInput.type = "password";
+            togglePassword.textContent = "👁"; // change icon when hiding
+    }
+  });
+   
+    </script>
+</body>
+
+</html>
